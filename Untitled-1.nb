@@ -1,0 +1,70 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      1607,         60]
+NotebookOptionsPosition[      1191,         42]
+NotebookOutlinePosition[      1638,         59]
+CellTagsIndexPosition[      1595,         56]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"V", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1", ",", "1"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Graphics3D", "[", 
+  RowBox[{"Arrow", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", " ", "V"}], "}"}], "]"}],
+   "]"}]}], "Input",
+ CellChangeTimes->{{3.5139275664494753`*^9, 3.5139276120115404`*^9}, {
+  3.513927642041583*^9, 3.5139276446815863`*^9}}],
+
+Cell[BoxData[
+ Graphics3DBox[Arrow3DBox[{0, 0, 0}, {1, 1, 1}]]], "Output",
+ CellChangeTimes->{3.5139276126415415`*^9}]
+}, Open  ]]
+},
+WindowSize->{701, 780},
+WindowMargins->{{Automatic, 459}, {Automatic, 26}},
+Magnification:>FEPrivate`If[
+  FEPrivate`Equal[FEPrivate`$VersionNumber, 6.], 1.25, 1.25 Inherited],
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 475, 13, 58, "Input"],
+Cell[1057, 37, 118, 2, 506, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
