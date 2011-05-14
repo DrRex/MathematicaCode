@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[    990532,      17363]
-NotebookOptionsPosition[    988982,      17315]
-NotebookOutlinePosition[    990144,      17354]
-CellTagsIndexPosition[    990101,      17351]
+NotebookDataLength[    992345,      17400]
+NotebookOptionsPosition[    990795,      17352]
+NotebookOutlinePosition[    991957,      17391]
+CellTagsIndexPosition[    991914,      17388]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1757,12 +1757,14 @@ Cell[BoxData[
          FractionBox[
           RowBox[{"Bx", "*", "By"}], "Jy"], "]"}]}], ";", 
        "\[IndentingNewLine]", 
+       RowBox[{"kDemp", " ", "=", " ", "0.000001"}], ";", 
+       "\[IndentingNewLine]", 
        RowBox[{"\[Alpha]h", "=", 
         RowBox[{
-         SqrtBox["\[Alpha]k2"], "*", "0.5"}]}], ";", "\[IndentingNewLine]", 
+         SqrtBox["\[Alpha]k2"], "*", "kDemp"}]}], ";", "\[IndentingNewLine]", 
        RowBox[{"\[Beta]h", "=", 
         RowBox[{
-         SqrtBox["\[Beta]k2"], "*", "0.5"}]}], ";", "\[IndentingNewLine]", 
+         SqrtBox["\[Beta]k2"], "*", "kDemp"}]}], ";", "\[IndentingNewLine]", 
        RowBox[{
         RowBox[{"aip1", "[", 
          RowBox[{"ai_", ",", "aim1_", ",", " ", "\[Beta]Val_"}], "]"}], ":=", 
@@ -1787,13 +1789,15 @@ Cell[BoxData[
               RowBox[{
                SuperscriptBox[
                 RowBox[{"(", "dt", ")"}], "2"], "*", "\[Alpha]k2"}], "-", 
-              "2"}], ")"}], "*", "ai"}], "-", 
+              "2"}], ")"}], "*", "ai"}]}], 
+          RowBox[{"(*", 
            RowBox[{
-            RowBox[{"(", 
-             RowBox[{"1", "-", 
-              FractionBox[
-               RowBox[{"dt", "*", "\[Alpha]h"}], "Jx"]}], ")"}], "*", 
-            "aim1"}]}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"-", 
+             RowBox[{"(", 
+              RowBox[{"1", "-", 
+               FractionBox[
+                RowBox[{"dt", "*", "\[Alpha]h"}], "Jx"]}], ")"}]}], "*", 
+            "aim1"}], "*)"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
        RowBox[{
         RowBox[{"bip1", "[", 
          RowBox[{"bi_", ",", "bim1_", ",", " ", "\[Alpha]Val_"}], "]"}], ":=", 
@@ -1803,7 +1807,7 @@ Cell[BoxData[
            FractionBox[
             RowBox[{"dt", "*", "\[Beta]h"}], "Jy"]}]], 
          RowBox[{"(", 
-          RowBox[{
+          RowBox[{"(*", 
            RowBox[{
             FractionBox[
              RowBox[{
@@ -1811,14 +1815,16 @@ Cell[BoxData[
                RowBox[{"(", "Bx", ")"}], "2"], "*", 
               SuperscriptBox[
                RowBox[{"(", "dt", ")"}], "2"]}], "Jy"], "*", "\[Alpha]Val"}], 
-           "-", 
+           "*)"}], 
+          RowBox[{
            RowBox[{
-            RowBox[{"(", 
-             RowBox[{
+            RowBox[{"-", 
+             RowBox[{"(", 
               RowBox[{
-               SuperscriptBox[
-                RowBox[{"(", "dt", ")"}], "2"], "*", "\[Beta]k2"}], "-", 
-              "2"}], ")"}], "*", "bi"}], "-", 
+               RowBox[{
+                SuperscriptBox[
+                 RowBox[{"(", "dt", ")"}], "2"], "*", "\[Beta]k2"}], "-", 
+               "2"}], ")"}]}], "*", "bi"}], "-", 
            RowBox[{
             RowBox[{"(", 
              RowBox[{"1", "-", 
@@ -1870,65 +1876,90 @@ Cell[BoxData[
             "\[RightDoubleBracket]"}]}], ";"}], "\[IndentingNewLine]", ",", 
          "\[IndentingNewLine]", 
          RowBox[{
-          RowBox[{"BVect", "=", 
-           RowBox[{"{", 
-            RowBox[{"Bx", ",", " ", "By", ",", " ", "Bz"}], "}"}]}], ";", 
-          "\[IndentingNewLine]", 
-          RowBox[{"SunSensorPlanar", " ", "=", " ", 
-           RowBox[{"N", "[", 
-            RowBox[{"sunSensorN", "\[LeftDoubleBracket]", 
-             RowBox[{"All", ",", " ", "1"}], "\[RightDoubleBracket]"}], 
-            "]"}]}], ";", "\[IndentingNewLine]", 
-          RowBox[{"SunVectPlanar", " ", "=", 
-           RowBox[{"N", "[", 
-            RowBox[{"SLinked", "\[LeftDoubleBracket]", 
-             RowBox[{"All", ",", " ", "1"}], "\[RightDoubleBracket]"}], 
-            "]"}]}], ";", "\[IndentingNewLine]", 
-          RowBox[{"\[CapitalTheta]", "=", 
-           RowBox[{"VectorAngle", "[", 
-            RowBox[{"SunSensorPlanar", ",", "BVect"}], "]"}]}], ";", 
-          "\[IndentingNewLine]", 
-          RowBox[{"k0", "=", "0.000005"}], ";", "\[IndentingNewLine]", 
-          RowBox[{"kT", "=", "0.00003"}], 
-          RowBox[{"(*", 
-           RowBox[{"If", "[", 
+          RowBox[{"If", "[", 
+           RowBox[{
             RowBox[{
-             RowBox[{
-              RowBox[{"Abs", "[", "\[CapitalTheta]", "]"}], "<", 
-              FractionBox["\[Pi]", "36"]}], ",", " ", 
-             FractionBox["k0", 
-              RowBox[{"Norm", "[", "SunVectPlanar", "]"}]], ",", 
-             RowBox[{"k0", "*", 
-              FractionBox["\[CapitalTheta]", 
-               RowBox[{"Norm", "[", 
-                RowBox[{"SunVectPlanar", "\[Cross]", "SunSensorPlanar"}], 
-                "]"}]]}]}], "]"}], "*)"}], ";", "\[IndentingNewLine]", 
-          RowBox[{"LKoval", " ", "=", " ", 
-           RowBox[{"kT", "*", 
-            RowBox[{"(", 
-             FractionBox[
+             RowBox[{"(", 
               RowBox[{
-               RowBox[{"SunSensorPlanar", "*", 
-                RowBox[{"(", 
-                 RowBox[{"BVect", ".", "SunVectPlanar"}], ")"}]}], "-", 
-               RowBox[{"SunVectPlanar", "*", 
-                RowBox[{"(", 
-                 RowBox[{"BVect", ".", "SunSensorPlanar"}], ")"}]}]}], 
-              RowBox[{"BVect", ".", "BVect"}]], ")"}]}]}], ";", 
-          "\[IndentingNewLine]", 
-          RowBox[{"Lnx", " ", "=", " ", 
-           RowBox[{
-           "LKoval", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}],
-           ";", "\[IndentingNewLine]", 
-          RowBox[{"Lny", " ", "=", " ", 
-           RowBox[{
-           "LKoval", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}],
-           ";", "\[IndentingNewLine]", 
-          RowBox[{"Lnz", " ", "=", " ", 
-           RowBox[{
-           "LKoval", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}]}],
-           ";"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
-       "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"Abs", "[", 
+                 RowBox[{
+                 "alphaListNom", "\[LeftDoubleBracket]", "n", 
+                  "\[RightDoubleBracket]"}], "]"}], " ", "<", 
+                FractionBox["\[Pi]", "4"]}], "&&", 
+               RowBox[{
+                RowBox[{"Abs", "[", 
+                 RowBox[{
+                 "betaListNom", "\[LeftDoubleBracket]", "n", 
+                  "\[RightDoubleBracket]"}], "]"}], " ", "<", 
+                FractionBox["\[Pi]", "4"]}]}], ")"}], "||", 
+             "sunOrientation"}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"sunOrientation", " ", "=", " ", "True"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"p", "=", 
+              FractionBox["kDemp", "Jy"]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"C1", "=", 
+              FractionBox["\[Pi]", "4"]}], ";", "\[IndentingNewLine]", 
+             "\[IndentingNewLine]", 
+             RowBox[{"C2", "=", 
+              RowBox[{
+               FractionBox[
+                RowBox[{"-", "p"}], "\[Beta]k2"], "C1"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"\[Beta]", "=", 
+              RowBox[{
+               SuperscriptBox["e", 
+                RowBox[{
+                 RowBox[{"-", "p"}], "*", "n", "*", "dt"}]], "*", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"C1", "*", 
+                  RowBox[{"Cos", "[", 
+                   RowBox[{"\[Beta]k2", "*", "n", "*", "dt"}], "]"}]}], "+", 
+                 RowBox[{"C2", "*", 
+                  RowBox[{"Sin", "[", 
+                   RowBox[{"\[Beta]k2", "*", "n", "*", "dt"}], "]"}]}]}], 
+                ")"}]}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+             RowBox[{"\[Alpha]Current", " ", "=", " ", 
+              RowBox[{"aip1", "[", 
+               RowBox[{
+                RowBox[{"alphaListNom", "\[LeftDoubleBracket]", 
+                 RowBox[{"n", "-", "1"}], "\[RightDoubleBracket]"}], ",", 
+                RowBox[{"alphaListNom", "\[LeftDoubleBracket]", 
+                 RowBox[{"n", "-", "2"}], "\[RightDoubleBracket]"}], ",", " ",
+                 "\[Beta]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"\[Beta]Current", " ", "=", " ", 
+              RowBox[{"bip1", "[", 
+               RowBox[{
+                RowBox[{"betaListNom", "\[LeftDoubleBracket]", 
+                 RowBox[{"n", "-", "2"}], "\[RightDoubleBracket]"}], ",", 
+                "\[Beta]", ",", " ", "0"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+              "alphaList", "\[LeftDoubleBracket]", "n", 
+               "\[RightDoubleBracket]"}], " ", "=", " ", 
+              RowBox[{
+               RowBox[{
+               "alphaListNom", "\[LeftDoubleBracket]", "n", 
+                "\[RightDoubleBracket]"}], "=", "\[Alpha]Current"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+              "betaList", "\[LeftDoubleBracket]", "n", 
+               "\[RightDoubleBracket]"}], " ", "=", " ", 
+              RowBox[{
+               RowBox[{
+               "betaListNom", "\[LeftDoubleBracket]", "n", 
+                "\[RightDoubleBracket]"}], "=", "\[Beta]Current"}]}], ";", 
+             "\[IndentingNewLine]", "\[IndentingNewLine]", 
+             RowBox[{"Lnz", "  ", "=", " ", 
+              RowBox[{"By", "*", "\[Beta]"}]}], ";"}], "\[IndentingNewLine]", 
+            ",", "\[IndentingNewLine]", 
+            RowBox[{"False", ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
        RowBox[{"Lx", " ", "=", " ", 
         RowBox[{"Evaluate", "[", 
          RowBox[{"Which", "[", 
@@ -3361,7 +3392,13 @@ A\[CenterDot]\!\(\*SuperscriptBox[\(\:043c\), \(2\)]\)\>\""}], "}"}]}], ",",
    3.5143547243100576`*^9}, {3.514354789939373*^9, 3.514354853166284*^9}, {
    3.5143549108083854`*^9, 3.5143549160343943`*^9}, {3.5143549606504726`*^9, 
    3.5143549633648777`*^9}, {3.51435506908862*^9, 3.514355081085041*^9}, {
-   3.5143551371827393`*^9, 3.5143551400999446`*^9}}],
+   3.5143551371827393`*^9, 3.5143551400999446`*^9}, {3.5143552125852747`*^9, 
+   3.5143552876058064`*^9}, {3.514355321177066*^9, 3.51435533518589*^9}, {
+   3.514355372891156*^9, 3.5143555377834463`*^9}, {3.514355658886459*^9, 
+   3.5143556631296663`*^9}, {3.5143557442282295`*^9, 3.514355796410321*^9}, {
+   3.51435592626495*^9, 3.514355993111067*^9}, {3.5143561293773065`*^9, 
+   3.514356149688542*^9}, {3.514356205853041*^9, 3.514356371930933*^9}, {
+   3.51435644428386*^9, 3.5143564865443344`*^9}}],
 
 Cell[BoxData[
  GraphicsBox[{InsetBox[
@@ -17354,16 +17391,16 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[567, 22, 148704, 3341, 13975, "Input"],
-Cell[149274, 3365, 125714, 2083, 526, "Output"],
-Cell[274991, 5450, 70553, 1178, 526, "Output"],
-Cell[345547, 6630, 71036, 1186, 526, "Output"],
-Cell[416586, 7818, 122334, 2028, 526, "Output"],
-Cell[538923, 9848, 125283, 2077, 526, "Output"],
-Cell[664209, 11927, 1370, 22, 78, "Message"],
-Cell[665582, 11951, 114869, 1907, 526, "Output"],
-Cell[780454, 13860, 124220, 2049, 758, "Output"],
-Cell[904677, 15911, 84289, 1401, 514, "Output"]
+Cell[567, 22, 150517, 3378, 14214, "Input"],
+Cell[151087, 3402, 125714, 2083, 526, "Output"],
+Cell[276804, 5487, 70553, 1178, 526, "Output"],
+Cell[347360, 6667, 71036, 1186, 526, "Output"],
+Cell[418399, 7855, 122334, 2028, 526, "Output"],
+Cell[540736, 9885, 125283, 2077, 526, "Output"],
+Cell[666022, 11964, 1370, 22, 78, "Message"],
+Cell[667395, 11988, 114869, 1907, 526, "Output"],
+Cell[782267, 13897, 124220, 2049, 758, "Output"],
+Cell[906490, 15948, 84289, 1401, 514, "Output"]
 }, Open  ]]
 }
 ]
